@@ -1,3 +1,35 @@
+# Gemini Fork
+I made this fork so that I could go through the examples using Gemini. As intended, swapping out one LLM in LangChain for another is easy and so far works with minimal changes. 
+
+Setup your Gemini account using the instructions here(https://python.langchain.com/docs/integrations/chat/google_generative_ai/)
+
+One you have done that the most basic edits are swapping out the import statement
+```python
+from langchain_openai.chat_models import ChatOpenAI
+```
+with this import statement
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
+```
+
+The other major change is access the Gemini API key per the instructions in the LangChain docs.
+
+```python
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
+    
+if "LANGSMITH_API_KEY" not in os.environ:
+    os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
+os.environ["LANGSMITH_TRACING"] = "true"
+```
+
+The last change is to instantiate the Gemini LLM rather than the OpenAI LLM
+```python
+ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+```
+
+I will try to keep this section updated as I find other repetitious changes.
+
 # Learning LangChain Code Examples
 
 This repository contains code examples (in python and javascript) from each chapter of the book ["Learning LangChain: Building AI and LLM Applications with LangChain and LangGraph"](https://www.oreilly.com/library/view/learning-langchain/9781098167271/) published by O'Reilly Media.

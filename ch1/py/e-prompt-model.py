@@ -1,5 +1,14 @@
-from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
+import getpass
+import os
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
+    
+if "LANGSMITH_API_KEY" not in os.environ:
+    os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
+os.environ["LANGSMITH_TRACING"] = "true"
 
 # both `template` and `model` can be reused many times
 
@@ -11,7 +20,7 @@ Question: {question}
 
 Answer: """)
 
-model = ChatOpenAI(model="gpt-3.5-turbo")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 # `prompt` and `completion` are the results of using template and model once
 
@@ -23,4 +32,4 @@ prompt = template.invoke(
 )
 
 response = model.invoke(prompt)
-print(response)
+print(response.content)

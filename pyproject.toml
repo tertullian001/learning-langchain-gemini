@@ -1,5 +1,5 @@
 [project]
-name = "learning-langchain"
+name = "learning-langchain-gemini"
 version = "0.0.1"
 description = "Code blocks for the book Learning LangChain."
 authors = []
@@ -35,4 +35,4 @@ packages = []
 "*" = ["py.typed"]
 
 [project.scripts]
-langgraph-dev = "langgraph.cli:dev_command --config ch9/py/langgraph.json --verbose"
+langgraph-dev = "langgraph.cli:dev_command"
